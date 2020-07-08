@@ -14,6 +14,12 @@ defaultEntryPoints = ["https","http"]
 
 [retry]
 
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "docker.localhost"
+watch = true
+swarmMode = true
+
 [acme]
 email = "user@domain.com"
 storage = "acme.json"
@@ -29,8 +35,3 @@ entryPoint = "https"
 [[acme.domains]]
   main = "domain.com"
 
-[docker]
-endpoint = "unix:///var/run/docker.sock"
-domain = "docker.localhost"
-watch = true
-swarmMode = true
