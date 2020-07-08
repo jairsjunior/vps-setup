@@ -6,10 +6,10 @@ echo "# -> Install Gitlab Runner                                             #"
 echo "########################################################################" 
 
 mkdir gitlab-runner && \
-read -p "Gitlab URL (Eg. http://gitlab.com):" GITLAB_URL && \
-read -p "Gitlab Registration Token:" TOKEN && \
-read -p "Gitlab Runner Name:" NAME && \
-read -p "Gitlab Runner Tag List (separated by comma. Eg. runner-build, runner-release):" TAG_LIST && \
+read -p "Gitlab URL (Eg. http://gitlab.com):" GITLAB_URL </dev/tty && \
+read -p "Gitlab Registration Token:" TOKEN </dev/tty && \
+read -p "Gitlab Runner Name:" NAME </dev/tty && \
+read -p "Gitlab Runner Tag List (separated by comma. Eg. runner-build, runner-release):" TAG_LIST </dev/tty && \
 cat << EOF > ./gitlab-runner/docker-compose.yml
 version: '3.5'
 services:

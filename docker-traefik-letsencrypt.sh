@@ -41,9 +41,9 @@ echo "########################################################################"
 mkdir traefik && \
 touch ./traefik/acme.json && \
 chmod 600 ./traefik/acme.json && \
-read -p "Email for letsencrypt notification (Eg. user@domain.com):" EMAIL_LETSENCRYPT
-read -p "Domain (Eg. domain.com):" SERVER_DOMAIN
-read -p "Use DNS-01 challenge (support only godaddy domains) [y/n]:" DNS_CHALLENGE
+read -p "Email for letsencrypt notification (Eg. user@domain.com):" EMAIL_LETSENCRYPT </dev/tty
+read -p "Domain (Eg. domain.com):" SERVER_DOMAIN </dev/tty
+read -p "Use DNS-01 challenge (support only godaddy domains) [y/n]:" DNS_CHALLENGE </dev/tty
 if [[ $DNS_CHALLENGE == "y" || $DNS_CHALLENGE == "Y" ]];
 then
     echo "API Key:"

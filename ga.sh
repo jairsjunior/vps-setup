@@ -15,7 +15,7 @@ fi
 sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config && \
 sed -i 's/#Port 22/Port 2222/g' /etc/ssh/sshd_config && \
 echo "Configure the google-authenticator..." && \
-read -p "Create a new username:" USERNAME
+read -p "Create a new username:" USERNAME </dev/tty
 adduser $USERNAME && \
 usermod -aG sudo $USERNAME && \
 sudo -u $USERNAME google-authenticator && \
