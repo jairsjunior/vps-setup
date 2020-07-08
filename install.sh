@@ -5,7 +5,7 @@ apt-get update && apt-get upgrade
 read -p "Install Google Authenticator [y/n]" GA </dev/tty
 if [[ $GA == "y" || $GA == "Y" ]];
 then
-    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/ga.sh | bash
+    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/ga.sh -o ga.sh & bash ga.sh
 fi
 read -p "Install ufw Firewall [y/n]" UFW </dev/tty
 if [[ $UFW == "y" || $UFW == "Y" ]];
