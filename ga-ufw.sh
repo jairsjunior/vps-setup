@@ -9,14 +9,16 @@ echo "########################################################################"
 echo "Installing 2FA.."
 
 echo "Installing libpam-google-authenticator.."
-apt-get update && apt-get install -y libpam-google-authenticator && \
+apt-get update && apt-get install -y libpam-google-authenticator
 echo "Configure sshd service" && \
 echo "auth required pam_google_authenticator.so" >> /etc/pam.d/sshd && \
 sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config && \
 sed -i 's/#Port 22/Port 2222/g' /etc/ssh/sshd_config && \
 service sshd restart && \
-echo "Configure the google_authenticator..." && \
-google_authenticator
+echo "Configure the google-authenticator..." && \
+echo "Inform the username that will login:"
+read USERNAME
+google-authenticator $USERNAME
 
 echo "Installing ufw.."
 apt-get update && apt-get install -y ufw && \
