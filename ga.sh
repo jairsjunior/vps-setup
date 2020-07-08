@@ -6,7 +6,7 @@ echo "# -> 2FA using Google Authenticator for ssh connections at 2222 port   #"
 echo "########################################################################"       
 
 echo "Installing libpam-google-authenticator.."
-apt-get update && apt-get install -y libpam-google-authenticator
+apt-get install -y libpam-google-authenticator
 echo "Configure sshd service" && \
 if ! grep -q "auth required pam_google_authenticator.so" "/etc/pam.d/sshd"; 
 then

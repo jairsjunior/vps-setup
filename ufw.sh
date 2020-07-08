@@ -5,7 +5,7 @@ echo "# This file configure the instalation and configuration of:            #"
 echo "# -> Firewall using ufw to only permit use of 2222/80/443 ports        #"
 echo "########################################################################"       
 
-apt-get update && apt-get install -y ufw && \
+apt-get install -y ufw && \
 echo "Configure ufw to accept only incoming calls from 2222,80,443..."
 ufw default deny incoming && \
 ufw default allow outgoing && \
