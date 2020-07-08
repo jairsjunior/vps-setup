@@ -5,21 +5,21 @@ apt-get update && apt-get upgrade
 read -p "Install Google Authenticator [y/n]" GA
 if [[ $GA == "y" || $GA == "Y" ]];
 then
-    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/ga.sh | bash
+    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/ga.sh -o ga.sh && bash ga.sh
 fi
 read -p "Install ufw Firewall [y/n]" UFW
 if [[ $UFW == "y" || $UFW == "Y" ]];
 then
-    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/ufw.sh | bash    
+    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/ufw.sh -o ufw.sh && bash ufw.sh
 fi
 read -p "Install docker-swarm-traefik-letsencrypt [y/n]" DOCKER
 if [[ $DOCKER == "y" || $DOCKER == "Y" ]];
 then
-    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/docker-traefik-letsencrypt.sh | bash
+    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/docker-traefik-letsencrypt.sh -o docker-traefik-letsencrypt.sh && bash docker-traefik-letsencrypt.sh
 fi
 read -p "Install gitlab-runner [y/n]" GR
 if [[ $GR == "y" || $GR == "Y" ]];
 then
-    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/gitlab-runner.sh | bash
+    curl https://raw.githubusercontent.com/jairsjunior/vps-setup/master/gitlab-runner.sh -o gitlab-runner.sh | bash gitlab-runner.sh
 fi
 
