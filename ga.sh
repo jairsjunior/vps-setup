@@ -18,7 +18,7 @@ echo "Configure the google-authenticator..." && \
 read -p "Create a new username:" USERNAME </dev/tty
 adduser $USERNAME && \
 usermod -aG sudo $USERNAME && \
-sudo -u $USERNAME google-authenticator && \
+bash -c "sudo -u $USERNAME google-authenticator" && \
 service sshd restart && \
 echo "########################################################################"  && \
 echo " -> 2FA configured to user: $USERNAME"  && \
