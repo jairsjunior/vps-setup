@@ -141,8 +141,8 @@ services:
       - 8080:8080
     volumes:
       - /run/docker.sock:/var/run/docker.sock
-      - ./traefik/acme.json:/acme.json
-      - ./traefik/traefik.toml:/etc/traefik/traefik.toml
+      - ./acme.json:/acme.json
+      - ./traefik.toml:/etc/traefik/traefik.toml
     deploy:
       labels:
         - traefik.enable=false

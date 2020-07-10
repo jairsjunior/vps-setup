@@ -23,5 +23,6 @@ services:
       - NAME=${RUNNER_NAME}
       - TAG_LIST=${TAG_LIST}
 
-EOF && \
+EOF
+
 docker-compose -f ./gitlab-runner/docker-compose.yml up -d
