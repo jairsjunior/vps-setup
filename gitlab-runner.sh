@@ -11,7 +11,7 @@ read -p "Gitlab Registration Token:" TOKEN </dev/tty && \
 read -p "Gitlab Runner Name:" NAME </dev/tty && \
 read -p "Gitlab Runner Tag List (separated by comma. Eg. runner-build, runner-release):" TAG_LIST </dev/tty && \
 cat << EOF > ./gitlab-runner/docker-compose.yml
-version: '3.5'
+version: "3.5"
 services:
   gitlab-runner:
     image: flaviostutz/gitlab-runner:ubuntu-v12.9.0.1
