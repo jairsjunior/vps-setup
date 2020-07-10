@@ -19,7 +19,7 @@ apt-get update && \
 apt-get install -y docker-ce docker-ce-cli containerd.io
 echo "{ \"iptables\": true, \"log-driver\": \"journald\" }" > /etc/docker/daemon.json && \
 service docker restart && \
-curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
 echo "########################################################################"
 echo " -> Docker Installed and Configured!"
 echo "########################################################################"

@@ -12,7 +12,7 @@ ufw default allow outgoing && \
 ufw allow 2222 && \
 ufw allow 80 && \
 ufw allow 443 && \
-ufw enable && \
+yes | ufw enable && \
 echo "########################################################################" && \
 echo " -> ufw configured to accept requests only 2222,443,80" && \
 echo "########################################################################"
