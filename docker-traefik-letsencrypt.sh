@@ -19,14 +19,20 @@ apt-get update && \
 apt-get install -y docker-ce docker-ce-cli containerd.io
 echo "{ \"iptables\": true, \"log-driver\": \"journald\" }" > /etc/docker/daemon.json && \
 service docker restart && \
-sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
-chmod +x /usr/local/bin/docker-compose && \
 echo "########################################################################"
 echo " -> Docker Installed and Configured!"
 echo "########################################################################"
 echo ""
 echo ""
 sleep 5
+echo "########################################################################"
+echo " -> Install docker-compose"
+echo "########################################################################"
+echo ""
+curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+chmod +x /usr/local/bin/docker-compose &&
+echo ""
+echo ""
 
 echo "########################################################################"
 echo "Configure Swarm..."
