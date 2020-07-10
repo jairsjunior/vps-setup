@@ -38,7 +38,7 @@ echo " -> Docker Swarm Configured!"
 echo "########################################################################"
 echo "Configure Traefik..."
 echo "########################################################################"
-mkdir traefik && \
+mkdir -p traefik && \
 touch ./traefik/acme.json && \
 chmod 600 ./traefik/acme.json && \
 read -p "Email for letsencrypt notification (Eg. user@domain.com): " EMAIL_LETSENCRYPT </dev/tty

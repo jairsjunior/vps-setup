@@ -5,7 +5,7 @@ echo "# This file configure the instalation and configuration of:            #"
 echo "# -> Install Gitlab Runner                                             #"
 echo "########################################################################" 
 
-mkdir gitlab-runner && \
+mkdir -p gitlab-runner && \
 read -p "Gitlab URL (Eg. http://gitlab.com):" GITLAB_URL </dev/tty && \
 read -p "Gitlab Registration Token:" TOKEN </dev/tty && \
 read -p "Gitlab Runner Name:" NAME </dev/tty && \
