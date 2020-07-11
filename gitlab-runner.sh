@@ -8,7 +8,7 @@ echo "########################################################################"
 mkdir -p gitlab-runner && \
 read -p "Gitlab URL (Eg. http://gitlab.com):" GITLAB_URL </dev/tty && \
 read -p "Gitlab Registration Token:" TOKEN </dev/tty && \
-read -p "Gitlab Runner Name:" NAME </dev/tty && \
+read -p "Gitlab Runner Name:" RUNNER_NAME </dev/tty && \
 read -p "Gitlab Runner Tag List (separated by comma. Eg. runner-build, runner-release):" TAG_LIST </dev/tty && \
 cat << EOF > ./gitlab-runner/docker-compose.yml
 version: "3.5"
