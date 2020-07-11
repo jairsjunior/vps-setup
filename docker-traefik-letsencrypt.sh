@@ -48,16 +48,7 @@ echo "########################################################################"
 mkdir -p traefik && \
 touch ./traefik/acme.json && \
 chmod 600 ./traefik/acme.json && \
-read -p "Email for letsencrypt notification (Eg. user@domain.com): " EMAIL_LETSENCRYPT </dev/tty
-read -p "Domain (Eg. domain.com): " SERVER_DOMAIN </dev/tty
-read -p "Use DNS-01 challenge (support only godaddy domains) [y/n]: " DNS_CHALLENGE </dev/tty
-if [[ $DNS_CHALLENGE == "y" || $DNS_CHALLENGE == "Y" ]];
-then
-    echo "API Key:"
-    read API_KEY
-    echo "API Secret:"
-    read API_SECRET
-    cat << EOF > ./traefik/traefik.toml
+cat << EOF > ./traefik/traefik.toml
 debug = true
 
 logLevel = "INFO"
@@ -66,8 +57,18 @@ defaultEntryPoints = ["https","http"]
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+EOF
+read -p "Enable 80 to 443 port redirection [y/n]:" ENABLE_HTTP_REDIRECTION </dev/tty
+if [[ $DNS_CHALLENGE == "y" || $DNS_CHALLENGE == "Y" ]];
+then
+  cat << EOF >> ./traefik/traefik.toml
     [entryPoints.http.redirect]
     entryPoint = "https"
+EOF
+fi
+
+read -p "Email for letsencrypt notification (Eg. user@domain.com): " EMAIL_LETSENCRYPT </dev/tty
+cat << EOF >> ./traefik/traefik.toml
   [entryPoints.https]
   address = ":443"
   [entryPoints.https.tls]
@@ -85,6 +86,15 @@ email = "${EMAIL_LETSENCRYPT}"
 storage = "acme.json"
 acmeLogging = true
 entryPoint = "https"
+EOF
+
+read -p "Use DNS-01 challenge (support only godaddy domains) [y/n]: " DNS_CHALLENGE </dev/tty
+if [[ $DNS_CHALLENGE == "y" || $DNS_CHALLENGE == "Y" ]];
+then
+    read -p "Domain (Eg. domain.com): " SERVER_DOMAIN </dev/tty
+    read -p "API Key:" API_KEY </dev/tty
+    read -p "API Secret:" API_SECRET </dev/tty
+    cat << EOF >> ./traefik/traefik.toml
 
 [acme.dnsChallenge]
   provider = "godaddy"
@@ -97,41 +107,19 @@ entryPoint = "https"
 EOF
 
 else
- cat << EOF > ./traefik/traefik.toml
-debug = true
-
-logLevel = "INFO"
-defaultEntryPoints = ["https","http"]
-
-[entryPoints]
-  [entryPoints.http]
-  address = ":80"
-    [entryPoints.http.redirect]
-    entryPoint = "https"
-  [entryPoints.https]
-  address = ":443"
-  [entryPoints.https.tls]
-
-[retry]
-
-[docker]
-endpoint = "unix:///var/run/docker.sock"
-domain = "docker.localhost"
-watch = true
-swarmMode = true
-
-[acme]
-email = "${EMAIL_LETSENCRYPT}"
-storage = "acme.json"
+ cat << EOF >> ./traefik/traefik.toml
 onHostRule = true
-acmeLogging = true
-entryPoint = "https"
 
 [acme.httpChallenge]
   entryPoint = "http"
-
 EOF
 
+fi
+
+DOCKER_SOCK_FILE_LOCATION=/var/run/docker.sock
+if [[ ! -f "$DOCKER_SOCK_FILE_LOCATION"]]; 
+then 
+  DOCKER_SOCK_FILE_LOCATION=/run/docker.sock
 fi
 
 cat << EOF > ./traefik/docker-compose.yml
@@ -147,7 +135,7 @@ services:
       - 443:443
       - 8080:8080
     volumes:
-      - /run/docker.sock:/var/run/docker.sock
+      - ${DOCKER_SOCK_FILE_LOCATION}:/var/run/docker.sock
       - ./acme.json:/acme.json
       - ./traefik.toml:/etc/traefik/traefik.toml
     deploy:
