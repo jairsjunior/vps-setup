@@ -116,12 +116,6 @@ EOF
 
 fi
 
-DOCKER_SOCK_FILE_LOCATION=/var/run/docker.sock
-if [[ ! -f "$DOCKER_SOCK_FILE_LOCATION"]]; 
-then 
-  DOCKER_SOCK_FILE_LOCATION=/run/docker.sock
-fi
-
 cat << EOF > ./traefik/docker-compose.yml
 version: "3.7"
 services:
@@ -135,7 +129,7 @@ services:
       - 443:443
       - 8080:8080
     volumes:
-      - ${DOCKER_SOCK_FILE_LOCATION}:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./acme.json:/acme.json
       - ./traefik.toml:/etc/traefik/traefik.toml
     deploy:
